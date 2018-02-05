@@ -1,0 +1,32 @@
+{
+    "name": "teltek/pmk2-up2u-pr-bundle",
+    "type": "symfony-bundle",
+    "description": "UP2U Personal Recorder WebTVBundle.",
+    "keywords": [
+        "theming",
+        "symfony2",
+        "bundle",
+        "pumukit",
+        "teltek"
+    ],
+    "homepage": "https://github.com/teltek/PuMuKIT2-up2u-pr-bundle",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Teltek Team",
+            "homepage": "http://teltek.es"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "symfony/framework-bundle": "~2.0",
+        "twig/twig": "~1.5",
+        "pumukit/pumukit2": "2.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pumukit\\Up2u\\WebTVBundle\\": ""
+        }
+    },
+    "bin": ["Resources/data/bin/geant_syncfeed_import"]
+}
