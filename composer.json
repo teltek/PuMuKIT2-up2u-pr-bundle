@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pumukit\\Up2u\\WebTVBundle\\": ""
+            "Pumukit\\Up2u\\PR\\WebTVBundle\\": ""
         }
     }
 }
