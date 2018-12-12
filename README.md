@@ -32,7 +32,12 @@ Install the bundle by executing the following line command. This command updates
 $ php app/console pumukit:install:bundle Pumukit/Up2u/WebTVBundle/PumukitUp2uWebTVBundle
 ```
 
-### Step 3: Update assets
+### Step 3: Add bundle to the assetic config
+
+assetic:
+    bundles:        [ "FOSCommentBundle", "PumukitWebTVBundle" ]
+
+### Step 4: Update assets
 
 ```bash
 $ php app/console cache:clear
