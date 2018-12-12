@@ -1,0 +1,39 @@
+<h1 class="row text-center"><a href="{{path('pumukit_poddium_myvideos_index')}}"><span class="btn btn-info" >My Videos</span></a></h1>
+
+<div class="index_widget row">
+    <div class="index_container col-xs-12">
+        <div class="col-md-4 col-sm-6">
+            <div class="img_category">
+        {% set title = "RECORD" %}
+                <a href="#">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
+                    <div class="cover">
+            {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="img_category">
+        {% set title = "SHARE" %}
+                <a href="#">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
+                    <div class="cover">
+            {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="img_category">
+        {% set title = "LEARN" %}
+                <a href="#">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
+                    <div class="cover">
+            {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
