@@ -1,0 +1,13 @@
+{% extends 'PumukitWebTVBundle::default.css.twig' %}
+
+{% block body %}
+{% autoescape false %}
+
+{% set big_breadcrumbs = false %}
+{% set breadcrumbs_background = '#D66400' %}
+{% set breadcrumbs_font_color = 'white' %}
+
+{{ parent() }}
+{# Add your own CSS rules #}
+{% endautoescape %}
+{% endblock %}
