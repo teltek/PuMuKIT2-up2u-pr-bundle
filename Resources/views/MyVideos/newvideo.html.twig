@@ -23,7 +23,34 @@
     <div class="modal-dialog modal-dialog-centered" role="document" style="width:98%; max-width:1200px;">
         <div class="modal-content">
             <div class="modal-body">
-                <iframe width="100%" height="850" src="/admin/personalrecorder?showButton=false"></iframe>
+                <ul class="root nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tab_upload" role="tab" data-toggle="tab">
+                            {% trans %} Upload {% endtrans %}
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="#tab_personal_recorder" role="tab" data-toggle="tab">
+                            {% trans %} Record {% endtrans %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tab_manager" role="tab" data-toggle="tab">
+                            {% trans %} My videos {% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+                <div class="root tab-content">
+                    <div class="tab-pane" id="tab_upload">
+                        <iframe id="pumukitpr_iframe_upload" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/simplewizard/embedindex"></iframe>
+                    </div>
+                    <div class="tab-pane active" id="tab_personal_recorder" data-medium-type="personal_recorder" class="tab-pane" >
+                        <iframe id="pumukitpr_iframe_recorder" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/personalrecorder?showButton=false"></iframe>
+                    </div>
+                    <div class="tab-pane" id="tab_manager">
+                        <iframe id="pumukitpr_iframe_my_videos" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/series"></iframe>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload()">Close</button>
@@ -32,3 +59,61 @@
     </div>
 </div>
 
+<script>
+ function setIframeHeight(iframe){
+     console.log(iframe.height(), iframe.contents().find('body').first().height());
+     iframe.height(iframe.contents().find('body').first().height());
+ }
+ // This works because when the height changes normally it's because the tree had changed
+ // Check to remove: https://caniuse.com/#search=Resize%20Observer
+ if(typeof ResizeObserver === 'function'){
+     MyResizeObserver = ResizeObserver;
+ } else {
+     MyResizeObserver = MutationObserver;
+ }
+ $('.backoffice-iframe').on('load', function(event){
+     var $target = $(event.target);
+     {# Manually remove menus  #}
+     $target.contents().find('.navbar-pumukit').remove();
+     $target.contents().find('.navbar-fixed-bottom').remove();
+     {# Change height #}
+     setIframeHeight($target);
+     //No need to check for subtree if using the real ResizeObserver
+     var config = {
+         attributes: true,
+         attributeOldValue: false,
+         characterData: true,
+         characterDataOldValue: false,
+         subtree: true
+     };
+     var observer = new MyResizeObserver(function(mutationsList){
+         console.log('observer', mutationsList);
+         setIframeHeight($target);
+     });
+     var body = $target.contents().find('body').get(0);
+     observer.observe(body, config);
+ });
+ $('.modal-body .nav-tabs .nav-item').on('shown.bs.tab', function(event){
+     var $target = $(event.target);
+     var iframe_id = $target.attr('href');
+     var $iframe = $(iframe_id+' iframe');
+     setIframeHeight($iframe);
+ });
+ $('#exampleModal').on('shown.bs.modal', function(event){
+     var $active_tab = $(event.target).find('.modal-body .nav-tabs .nav-item.active a.nav-link.active').first();
+     var iframe_id = $active_tab.attr('href');
+     //debugger;
+     var $iframe = $(iframe_id+' iframe');
+     setIframeHeight($iframe);
+ });
+ window.addEventListener('message', function(e){
+     if(e.data.mmId){
+         window.location.reload();
+     }
+ });
+</script>
+<style>
+ iframe {
+     border: none;
+ }
+</style>
