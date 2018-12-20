@@ -1,36 +1,92 @@
-<h1 class="row text-center"><a href="{{path('pumukit_poddium_myvideos_index')}}"><span class="btn btn-info" >My Videos</span></a></h1>
 
+<div class='fancy-header' align="center">
+    <br>
+    <h2>
+        <b>Welcome to Poddium </b>
+    </h2>
+    <br>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="float: center; font-size: 20px;">
+            <span style="margin: 5px;">Record <span class="glyphicon glyphicon-film"></span></span>
+            <span style="margin: 5px;">Share <span class="glyphicon glyphicon-globe"></span></span>
+            <span style="margin: 5px;">Learn <span class="glyphicon glyphicon-education"></span></span>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+<br>
+<h2 class="row text-center">
+    <a
+        href="{{ path('pumukit_poddium_myvideos_index') }}"
+        type="button" class="gotobackofficevideos-button btn btn-xs btn-default"
+        title="{% trans %}My videos{% endtrans %}"
+        style="font-size: 30px; border-radius: 5px;"
+    >
+        <span class="glyphicon glyphicon-briefcase"></span> {% trans %}My videos{% endtrans %}
+    </a>
+</h2>
+<h1>{% trans %} Channels {% endtrans %}</h1>
 <div class="index_widget row">
     <div class="index_container col-xs-12">
         <div class="col-md-4 col-sm-6">
             <div class="img_category">
-        {% set title = "RECORD" %}
-                <a href="#">
-                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
+                {% set title = "Business" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 2 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/1.jpg') }}"/>
                     <div class="cover">
-            {{ title|trans }}
+                        {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+            <div class="img_category two">
+                {% set title = "Natural Sciences" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 3 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/2.jpg') }}"/>
+                    <div class="cover">
+                        {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row visible-sm"></div>
+
+        <div class="col-md-4 col-sm-6">
+            <div class="img_category">
+                {% set title = "Health & Medicine" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 6 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/5.jpg') }}"/>
+                    <div class="cover">
+                        {{ title|trans }}
+                    </div>
+                </a>
+            </div>
+            <div class="img_category two">
+                {% set title = "Humanities" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 5 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/4.jpg') }}"/>
+                    <div class="cover">
+                        {{ title|trans }}
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="img_category">
-        {% set title = "SHARE" %}
-                <a href="#">
-                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
+                {% set title = "Law" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 4 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/3.jpg') }}"/>
                     <div class="cover">
-            {{ title|trans }}
+                        {{ title | trans }}
                     </div>
                 </a>
             </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="img_category">
-        {% set title = "LEARN" %}
-                <a href="#">
-                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/0.jpg') }}"/>
-                    <div class="cover">
-            {{ title|trans }}
+            <div class="img_category two ">
+                {% set title = "Social Matters & Education" %}
+                <a href="{{ path('pumukit_webtv_channel_series', {'channelNumber': 7 }) }}">
+                    <img alt="{{ title | trans }} icon" src="{{ asset('bundles/pumukitwebtv/images/6.jpg') }}"/>
+                    <div class="cover" style="font-size:113%;">
+                        {{ title|trans }}
                     </div>
                 </a>
             </div>
