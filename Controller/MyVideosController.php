@@ -62,7 +62,7 @@ class MyVideosController extends Controller implements AdminController
         $repo = $this->get('doctrine_mongodb')->getRepository('PumukitSchemaBundle:MultimediaObject');
         //$mmobjs = $repo->createBuilderByPersonIdWithRoleCod($person->getId(), $roleCode, array('public_date' => -1));
         //$mmobjs->field('status')->notEqual(MultimediaObject::STATUS_PROTOTYPE)->field('islive')->equals(false);
-        $mmobjs = $repo->createStandardQueryBuilder();
+        $mmobjs = $repo->createStandardQueryBuilder()->sort(array('public_date' => -1));
         $pagerfanta = $this->createPager($mmobjs, $request->query->get('page', 1), $limit);
 
 
