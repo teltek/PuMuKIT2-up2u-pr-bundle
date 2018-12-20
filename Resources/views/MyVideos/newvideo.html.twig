@@ -108,7 +108,10 @@
  });
  window.addEventListener('message', function(e){
      if(e.data.mmId){
-         window.location.reload();
+         //We needed a "close" button that reloads the parent
+         $button = $('#exampleModal .modal-footer button').first().clone();
+         $button.attr("onclick", "window.parent.location.reload()");
+         $('#pumukitpr_iframe_recorder').contents().find('#modalRedirecting .modal-dialog .modal-body').append($button.get(0));
      }
  });
 </script>
