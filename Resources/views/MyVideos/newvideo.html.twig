@@ -36,7 +36,6 @@
              //setTimeout(500, setIframeHeight(iframe));
          }
          //console.log(iframe.height(), iframe.contents().find('body').first().height());
-         console.log(iframe);
          iframe.height(height);
      }
      function showTab(button, tabid){
@@ -44,6 +43,12 @@
          $(tabid).show();
          var $iframe = $(tabid+' iframe');
          setIframeHeight($iframe);
+         //TODO: Think of a better solution to multiple tabs with custom height.
+         setTimeout(function(){
+             if($iframe.height() === 0){
+                 setIframeHeight($iframe);
+             }
+         }, 800);
      }
     </script>
     <button
@@ -130,7 +135,6 @@
          subtree: true
      };
      var observer = new MyResizeObserver(function(mutationsList){
-         //console.log('observer', mutationsList);
          setIframeHeight($target);
      });
      var body = $target.contents().find('body').get(0);
@@ -147,7 +151,6 @@
      var iframe_id = $active_tab.attr('href');
      //debugger;
      var $iframe = $(iframe_id+' iframe');
-     console.log('shown', $iframe);
      setIframeHeight($iframe);
  });
  $('#backofficeModal').on('hide.bs.modal', function(event){
