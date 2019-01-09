@@ -1,69 +1,112 @@
 <!--Multimedia object-->
 <h1 class="row text-center">
     {#<a href="/admin/personalrecorder">#}
+    <style>
+     .myvideos-consistent-btn {
+         font-size: 30px;
+         border-radius: 5px;
+         background: #fff;
+         padding: 5px 10px;
+         border-color: #ccc;
+     }
+     .myvideos-consistent-btn:hover {
+         border-color: #adadad;
+     }
+     .myvideos-consistent-btn.btn-danger{
+         color: red;
+         background: #fff;
+         border-color: red;
+     }
+     .myvideos-consistent-btn.btn-danger:hover{
+         border-color: #ac2925;
+     }
+     .myvideos-consistent-btn.btn-sm {
+         font-size: 15px;
+         padding: 2px 8px;
+     }
+     #backofficeModal .modal-footer {
+         padding: 5px;
+     }
+    </style>
+    <script>
+     function setIframeHeight(iframe){
+         var height = iframe.contents().find('body').first().height();
+         if(height == 0) {
+             //console.log(iframe);
+             //setTimeout(500, setIframeHeight(iframe));
+         }
+         //console.log(iframe.height(), iframe.contents().find('body').first().height());
+         console.log(iframe);
+         iframe.height(height);
+     }
+     function showTab(button, tabid){
+         $('.tab-pane').hide();
+         $(tabid).show();
+         var $iframe = $(tabid+' iframe');
+         setIframeHeight($iframe);
+     }
+    </script>
     <button
         type="button"
-        class="btn btn-primary"
+        class="btn myvideos-consistent-btn"
         data-toggle="modal"
-        data-target="#exampleModal"
+        data-target="#backofficeModal"
         aria-hidden="true"
-        style="
-              color:red;
-              border:2px solid red;
-              font-weight: bold;
-              font-size: 28px;
-              background: white;">
-        + RECORD NEW VIDEO
+        href="tab_upload"
+        onclick="showTab(this, '#tab_upload');">
+        <span class="glyphicon glyphicon-upload"></span> {% trans %}Upload{% endtrans %}
+    </button>
+    <button
+        type="button"
+        class="btn btn-danger myvideos-consistent-btn"
+        data-toggle="modal"
+        data-target="#backofficeModal"
+        aria-hidden="true"
+        href="tab_record"
+        onclick="showTab(this, '#tab_record');">
+        <span class="glyphicon glyphicon-film"></span> {% trans %}Record{% endtrans %}
+    </button>
+    <button
+        type="button"
+        class="btn myvideos-consistent-btn"
+        data-toggle="modal"
+        data-target="#backofficeModal"
+        aria-hidden="true"
+        href="tab_manage"
+        onclick="showTab(this, '#tab_manage');">
+        <span class="glyphicon glyphicon-briefcase"></span> {% trans %}Manage{% endtrans %}
     </button>
     {#</a>#}
 </h1>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Backoffice Modal -->
+<div class="modal fade" id="backofficeModal" tabindex="-1" role="dialog" aria-labelledby="backofficeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="width:98%; max-width:1200px;">
         <div class="modal-content">
             <div class="modal-body">
-                <ul class="root nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_upload" role="tab" data-toggle="tab">
-                            {% trans %} Upload {% endtrans %}
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link active" href="#tab_personal_recorder" role="tab" data-toggle="tab">
-                            {% trans %} Record {% endtrans %}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tab_manager" role="tab" data-toggle="tab">
-                            {% trans %} My videos {% endtrans %}
-                        </a>
-                    </li>
-                </ul>
-                <div class="root tab-content">
-                    <div class="tab-pane" id="tab_upload">
-                        <iframe id="pumukitpr_iframe_upload" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/simplewizard/embedindex"></iframe>
-                    </div>
-                    <div class="tab-pane active" id="tab_personal_recorder" data-medium-type="personal_recorder" class="tab-pane" >
-                        <iframe id="pumukitpr_iframe_recorder" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/personalrecorder?showButton=false"></iframe>
-                    </div>
-                    <div class="tab-pane" id="tab_manager">
-                        <iframe id="pumukitpr_iframe_my_videos" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/series"></iframe>
-                    </div>
+                <div id="tab_upload" data-medium-type="personal_recorder" class="tab-pane" >
+                    <iframe id="iframe_upload" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/simplewizard/embedindex"></iframe>
+                </div>
+                <div class="tab-pane" id="tab_record" data-medium-type="personal_recorder" class="tab-pane" >
+                    <iframe id="iframe_record" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/personalrecorder?showButton=false"></iframe>
+                </div>
+                <div class="tab-pane" id="tab_manage" data-medium-type="personal_recorder" class="tab-pane" >
+                    <iframe id="iframe_manage" class="backoffice-iframe" scrolling="no" width="100%" height="850" src="/admin/series"></iframe>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload()">Close</button>
+                <button
+                    type="button"
+                    class="btn btn-sm myvideos-consistent-btn"
+                    data-dismiss="modal">
+                 Close
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
- function setIframeHeight(iframe){
-     console.log(iframe.height(), iframe.contents().find('body').first().height());
-     iframe.height(iframe.contents().find('body').first().height());
- }
  // This works because when the height changes normally it's because the tree had changed
  // Check to remove: https://caniuse.com/#search=Resize%20Observer
  if(typeof ResizeObserver === 'function'){
@@ -87,7 +130,7 @@
          subtree: true
      };
      var observer = new MyResizeObserver(function(mutationsList){
-         console.log('observer', mutationsList);
+         //console.log('observer', mutationsList);
          setIframeHeight($target);
      });
      var body = $target.contents().find('body').get(0);
@@ -99,19 +142,23 @@
      var $iframe = $(iframe_id+' iframe');
      setIframeHeight($iframe);
  });
- $('#exampleModal').on('shown.bs.modal', function(event){
+ $('#backofficeModal').on('shown.bs.modal', function(event){
      var $active_tab = $(event.target).find('.modal-body .nav-tabs .nav-item.active a.nav-link.active').first();
      var iframe_id = $active_tab.attr('href');
      //debugger;
      var $iframe = $(iframe_id+' iframe');
+     console.log('shown', $iframe);
      setIframeHeight($iframe);
+ });
+ $('#backofficeModal').on('hide.bs.modal', function(event){
+     window.location.reload();
  });
  window.addEventListener('message', function(e){
      if(e.data.mmId){
          //We needed a "close" button that reloads the parent
-         $button = $('#exampleModal .modal-footer button').first().clone();
+         $button = $('#backofficeModal .modal-footer button').first().clone();
          $button.attr("onclick", "window.parent.location.reload()");
-         $('#pumukitpr_iframe_recorder').contents().find('#modalRedirecting .modal-dialog .modal-body').append($button.get(0));
+         $('#iframe_record').contents().find('#modalRedirecting .modal-dialog .modal-body').append($button.get(0));
      }
  });
 </script>
