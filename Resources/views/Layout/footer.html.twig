@@ -8,4 +8,10 @@
 
  gtag('config', 'UA-26837279-6');
 </script>
+{% if app.request.host in ['https://naked-pr-up2u.teltek.es', 'https://naked-pr-up2u.teltek.es', 'https://poddium.eu']%}
+  <script type="application/javascript" src="https://cdn.test.up2university.eu/scripts/matomo-production.js"></script>
+{% else %}
+  <script type="application/javascript" src="https://cdn.test.up2university.eu/scripts/matomo-test.js"></script>
+{% endif %}
+
 {% endif %}
