@@ -1,0 +1,11 @@
+{% if app.request.host in ['poddium.eu', 'up2u.poddium.eu', 'pr-up2u.teltek.es'] %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-26837279-6"></script>
+    <script>
+     $(function(){
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'UA-26837279-6');
+     });
+    </script>
+{% endif %}
